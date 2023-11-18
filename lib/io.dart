@@ -31,11 +31,7 @@ class IOSseChannel extends StreamChannelMixin implements SseChannel {
         StreamController<String?>.broadcast(onListen: () async {
       final request = http.Request(
         'GET',
-        _serverUrl.replace(
-          queryParameters: {
-            'sseClientId': _clientId,
-          },
-        ),
+        _serverUrl,
       )..headers['Accept'] = 'text/event-stream';
 
       await client.send(request).then((response) {
